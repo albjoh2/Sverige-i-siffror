@@ -3,7 +3,26 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4" id="title">Welcome</h1>
+    <button onclick="loadNewMap('befolkning.json', 'Befolkning')">Befolkning</button>
+    <button onclick="loadNewMap('befolkningsokning.json', 'Befolkningsökning')">Befolkningsökning</button>
+    <button onclick="loadNewMap('invandringsoverskott.json', 'Invandringsöverskott')">Invandringsoverskott</button>
+    <button onclick="loadNewMap('utrikesfodda.json', 'Utrikesfödda')">Utrikes födda %</button>
+    <button onclick="loadNewMap('medelalder.json', 'Medelålder')">Medelålder</button>
+    <button onclick="loadNewMap('aktenskapslangd.json', 'Äktenskapslängd')">Äktenskapslängd</button>
+    <button onclick="loadNewMap('andelensamhushall.json', 'Andel ensamhushåll')">Andel personer i ensamhushåll</button>
+    <button onclick="loadNewMap('personerPerHushall.json', 'Antal personer per hushåll')">Antal personer per hushåll</button>
+    <button onclick="loadNewMap('bostadsAreaPerPerson.json', 'Bostads area per person')">Bostads area per person</button>
+    <button onclick="loadNewMap('forvarvsinkomst20till64arMedelvarde.json', 'Förvarvsinkomst 20 till 64 år(Medelvarde)' )">Förvarvsinkomst 20 till 64 år</button>
+    <button onclick="loadNewMap('ojamnlikhetIInkomstInnomKommunGini.json', 'Gini')">Ojamnlikheter i inkomst(Gini)</button>
+    <button onclick="loadNewMap('bilarPer1000pers.json', 'Bilar per 1000 personer')">Bilar per 1000 personer</button>
+    <button onclick="loadNewMap('modernsAlderVidBarnafodsel.json', 'Moderns ålder vid födsel')">Moderns ålder vid barnafödsel</button>
+    <button onclick="loadNewMap('medellivslangdKvinnor.json', 'Medellivslängd kvinnor')">Medellivslängd kvinnor</button>
+    <button onclick="loadNewMap('medellivslangdMan.json', 'Medellivslängd män')">Medellivslängd män</button>
+    <button onclick="loadNewMap('befalkningsTathet.json', 'Befolkningstäthet')">Befolkningstäthet</button>
+    <button onclick="loadNewMap('antalFritidshus.json', 'Antal fritidshus')">Antal fritidshus</button>
+    <button onclick="loadNewMap('hyraPerKvm.json', 'Hyra per Kvm')">Hyresrätters hyra per Kvm</button>
+    <button onclick="loadNewMap('mwhPerAr.json', 'mwh/år')">Energianvändning</button>
+    <div id="map"></div>
 </div>
 
