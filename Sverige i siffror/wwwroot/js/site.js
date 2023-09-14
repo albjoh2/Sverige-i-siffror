@@ -7,8 +7,11 @@ var zoomLevel = 5;    // Replace with your desired zoom level
 // Initialize your Leaflet map
 var map = L.map('map').setView([latitude, longitude], zoomLevel);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
+    minZoom: 5,
+    maxZoom: 10,
+    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    ext: 'png'
 }).addTo(map);
 
 // Define the current projection (SWEREF99_TM)
@@ -39,8 +42,11 @@ function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", colo
         }
     });
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
+        minZoom: 5,
+        maxZoom: 10,
+        attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        ext: 'png'
     }).addTo(map);
 
     // Load your GeoJSON data
@@ -93,17 +99,33 @@ function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", colo
                         var kommunCode = feature.properties.kommun.substring(0, 4);
                         // Find the population for this kommun code
                         var population = populationMap[kommunCode];
-                        // Calculate the color based on population
-                        var color = colorScale(population || 0); // Default to 0 population if not found
 
-                        return {
-                            fillColor: color,
+                        // Default style for features with no population data
+                        var defaultStyle = {
+                            fillColor: '#aaaaaa', // Gray color
                             weight: 1,
                             opacity: 1,
-                            color: 'white',
+                            color: '#white', // Darker gray border color
                             dashArray: '3',
                             fillOpacity: 0.5
                         };
+
+                        // Check if population data exists
+                        if (population) {
+                            // Calculate the color based on population
+                            var color = colorScale(population);
+                            return {
+                                fillColor: color,
+                                weight: 1,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.9
+                            };
+                        } else {
+                            // Set the default gray style when data does not exist
+                            return defaultStyle;
+                        }
                     },
                     onEachFeature: function (feature, layer) {
                         // Get the kommun code from the feature properties
@@ -120,7 +142,19 @@ function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", colo
 
                         layer.bindPopup(popupContent);
                     }
+                });
+
+                // Add the GeoJSON layer to the map
+                kommunerGeoJSON.addTo(map);
+
+                // Add the tile layer on top of the GeoJSON layer
+                L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
+                    minZoom: 5,
+                    maxZoom: 10,
+                    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    ext: 'png'
                 }).addTo(map);
+
             } catch (error) {
                 console.error('Error processing GeoJSON data:', error);
             }

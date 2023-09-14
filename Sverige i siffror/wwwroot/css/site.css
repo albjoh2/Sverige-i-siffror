@@ -24,3 +24,18 @@ body {
 #map {
     height: 800px;
 }
+
+button{
+    background-color: #fff;
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    margin: 0.2rem 0rem;
+}
+
+button:active {
+    background-color: #333333
+}
+
+button:hover{
+    background-color: #f5f5f5
+}
