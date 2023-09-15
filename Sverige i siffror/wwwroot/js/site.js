@@ -1,14 +1,14 @@
 ﻿// Replace these with your desired coordinates and zoom level
 var latitude = 63.505; // Replace with your latitude
 var longitude = 18.09; // Replace with your longitude
-var zoomLevel = 5;    // Replace with your desired zoom level
+var zoomLevel = 4;    // Replace with your desired zoom level
 
 
 // Initialize your Leaflet map
 var map = L.map('map').setView([latitude, longitude], zoomLevel);
 
 L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
-    minZoom: 5,
+    minZoom: 4,
     maxZoom: 10,
     attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     ext: 'png'
@@ -30,7 +30,7 @@ function transformCoordinates(coord) {
     }
 }
 
-function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", color1 = "#55ff55", color2 = "#ff5555", exponent = 0.2) {
+function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", color1 = "#00ff00", color2 = "#0000ff", exponent = 1) {
 
     map.eachLayer(function (layer) {
         if (layer instanceof L.LayerGroup) {
@@ -43,7 +43,7 @@ function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", colo
     });
 
     L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
-        minZoom: 5,
+        minZoom: 4,
         maxZoom: 10,
         attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         ext: 'png'
@@ -149,7 +149,7 @@ function loadNewMap(dataFile = "befolkning.json", dataTitle = "befolkning", colo
 
                 // Add the tile layer on top of the GeoJSON layer
                 L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.{ext}', {
-                    minZoom: 5,
+                    minZoom: 4,
                     maxZoom: 10,
                     attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                     ext: 'png'
